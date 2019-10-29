@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+    <!-- screen.css file -->
+    <link rel="stylesheet" href="./style/style.css">
+    <!-- jquery and bootstrap js files cdn -->
+</head>
+
+<body>
+    <!-- Status Bar -->
+    <div id="status">
+        <p></p>
+        <button class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+    </div>
+    <!-- Current Weather -->
+    <div id="current" class="wrapper">
+        <nav>
+            <button id="locateBtn">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+            </button>
+            <button id="unitBtn" data-units="f">f</button>
+        </nav>
+        <h1 class="location" id="title-location"></h1>
+        <h2 class="date" id="title-date"></h2>
+        <div class="weatherIcon">
+            <div class="sunny">
+                <div class="inner">
+                </div>
+            </div>
+        </div>
+        <p class="temp"></p>
+        <p class="conditions">Sunny</p>
+        <p class="tempRange"><span class="high"></span> | <span class="low"></span></p>
+        <p class="humidity"><span class="humidity-label">Humidity:</span> <span class="humidity-value"></span></p>
+        <p class="pressure"><span class="pressure-label">Pressure:</span> <span class="pressure-value"></span></p>
+    </div>
+    <div class="search-box" id="search">
+        <div class="container">
+            <div class="form-search">
+                <input class="form-search-input" type="text" placeholder="City..." name="city" />
+                <input class="form-search-input" type="text" placeholder="Country..." name="country" />
+                <button class="form-search-btn"> Search</button>
+            </div>
+        </div>
+    </div>
+    <!-- Future Forecast -->
+    <!-- <div id="future" class="wrapper">
+        <div class="container">
+            <h3 class="day">Mon</h3>
+            <div class="weatherIcon">
+                <div class="partlycloudy">
+                    <div class="inner"></div>
+                </div>
+            </div>
+            <p class="conditions">Partly Cloudy</p>
+            <p class="tempRange"><span class="high">64</span> | <span class="low">48</span></p>
+        </div>
+        <div class="container">
+            <h3 class="day">Tue</h3>
+            <div class="weatherIcon">
+                <div class="mostlycloudy">
+                    <div class="inner"></div>
+                </div>
+            </div>
+            <p class="conditions">Mostly Cloudy</p>
+            <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
+        </div>
+        <div class="container">
+            <h3 class="day">Wed</h3>
+            <div class="weatherIcon">
+                <div class="rain">
+                    <div class="inner"></div>
+                </div>
+            </div>
+            <p class="conditions">Chance of Rain</p>
+            <p class="tempRange"><span class="high">63</span> | <span class="low">59</span></p>
+        </div>
+    </div> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwQl8QdFAuyJF3KGe1wcju_Ozl1_lVDuY"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
