@@ -20,9 +20,10 @@
     <div id="current" class="wrapper">
         <nav>
             <button id="locateBtn">
-                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                <!-- <i class="fa fa-location-arrow" aria-hidden="true"></i> -->
+                <img id="location" class="location-arrow" src="/images/navigation.png" alt="location-arrow" />
             </button>
-            <button id="unitBtn" data-units="f">f</button>
+            <!-- <button id="unitBtn" data-units="f">f</button> -->
         </nav>
         <h1 class="location" id="title-location"></h1>
         <h2 class="date" id="title-date"></h2>
@@ -41,8 +42,8 @@
     <div class="search-box" id="search">
         <div class="container">
             <div class="form-search">
-                <input class="form-search-input" type="text" placeholder="City..." name="city" />
-                <input class="form-search-input" type="text" placeholder="Country..." name="country" />
+                <input class="form-search-input" id="city-input" type="text" placeholder="City..." name="city" />
+                <input class="form-search-input" id="country-input" type="text" placeholder="Country..." name="country" />
                 <button class="form-search-btn"> Search</button>
             </div>
         </div>

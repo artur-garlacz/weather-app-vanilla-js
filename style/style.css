@@ -164,6 +164,16 @@ nav {
     margin-right: 10px;
 }
 
+.location-arrow {
+    width: 50%;
+    opacity: .6;
+    transform: translate(-5%, 10%);
+}
+
+.location-arrow:hover {
+    opacity: 1;
+}
+
 #unitBtn {
     font-weight: 300;
     padding-right: 3px;

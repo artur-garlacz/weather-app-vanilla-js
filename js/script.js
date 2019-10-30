@@ -18,6 +18,8 @@ const _viewModel = {
         _viewModel.getLocation()
         let titleDate = document.getElementById("title-date");
         titleDate.innerHTML = _viewModel.getCurrentTime()
+        document.querySelector(".form-search-btn").addEventListener("click", _viewModel.fetchWeatherDataFromUser)
+        document.getElementById("location").addEventListener("click", _viewModel.getLocation)
     },
     getLocation: () => {
         if (navigator.geolocation) {
@@ -32,10 +34,7 @@ const _viewModel = {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     },
-    getPosition: position => {
-        console.log(position)
-        return position
-    },
+
     getAddressFromLatLng: position => {
         let { latitude, longitude } = position.coords;
         let latlng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
@@ -66,12 +65,31 @@ const _viewModel = {
         return day + ' ' + monthNames[monthIndex] + ' ' + year + " | " + date.toLocaleTimeString();
     },
     fetchWeatherDataFromLatLng: async position => {
-        const { latitude, longitude } = position.coords;
+        let { latitude, longitude } = position.coords;
         console.log(_viewModel.currentPosition)
-        const currLat = latitude || 50.049683;
-        const currLng = longitude || 19.944544;
-        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${currLat}&lon=${currLng}&appid=${API_KEY}&units=metric`);
-        const data = await api_call.json();
+        let currLat = latitude || 50.049683;
+        let currLng = longitude || 19.944544;
+        let api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${currLat}&lon=${currLng}&appid=${API_KEY}&units=metric`);
+        let data = await api_call.json();
+        _viewModel.displayData(data)
+    },
+    fetchWeatherDataFromUser: async () => {
+        let city = document.getElementById("city-input").value
+        let country = document.getElementById("country-input").value
+        console.log(city, country)
+        let api_call_by_user = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
+        let data = await api_call_by_user.json();
+        console.log(data)
+        if (data.cod === 200) {
+            _viewModel.displayData(data)
+            _viewModel.addressValue.innerHTML = city + ", " + country
+        } else {
+            alert("City not found")
+        }
+
+    },
+    displayData: data => {
+        // change image and backgroundColor depends on current weather  
         const { humidity, pressure, temp, temp_max, temp_min } = data.main
         const { main, icon } = data.weather[0]
         const { tempValue,
@@ -87,21 +105,15 @@ const _viewModel = {
         humidityValue.innerHTML = humidity
         pressureValue.innerHTML = pressure
         conditionsValue.innerHTML = main
-        document.body.style.backgroundColor = "rgb(" + 255 / temp + "," + 255 / temp + "," + 255 / temp + ")";
         console.log(data)
         document.body.style.backgroundColor = _viewModel.getChangeBackground(main)
+        document.querySelector(".inner").innerHTML = ""
         let weatherImg = document.createElement("img");
         weatherImg.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png")
         document.querySelector(".inner").appendChild(weatherImg)
     },
-    fetchWeatherDataFromUser: () => {
-        let city = document.getElementById("city").value
-        let country = document.getElementById("city").value
-        // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${currLat}&lon=${currLng}&appid=${API_KEY}&units=metric`);
-
-    },
     getChangeBackground: value => {
-        let backgroundColor = null;
+        // returns backgroundColor depends on current weather
         switch (value) {
             case "Thunderstorm":
                 return backgroundColor = "#000000";
@@ -112,41 +124,12 @@ const _viewModel = {
             case "Clouds":
                 return backgroundColor = "#979999";
             case "Clear":
-                return backgroundColor = "#FFB300";
+                return backgroundColor = "#86B9E0";
             case "Fog":
                 return backgroundColor = "#B8B8B8";
             case "Drizzle":
                 return backgroundColor = "#B8B8B8";
         }
-        return backgroundColor;
-
-        // if (mI {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#FFB300"));
-        // }
-        // else if (mIcon.equals("clear-night")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#121735"));
-        // }
-        // else if (mIcon.equals("rain")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#3C424C"));
-        // }
-        // else if (mIcon.equals("snow")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#EDEFF3"));
-        // }
-        // else if (mIcon.equals("sleet")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#B8B8B8"));
-        // }
-        // else if (mIcon.equals("fog")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#D3D2D3"));
-        // }
-        // else if (mIcon.equals("cloudy")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#C9CACA"));
-        // }
-        // else if (mIcon.equals("partly-cloudy-day")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#E8F3F7"));
-        // }
-        // else if (mIcon.equals("partly-cloudy-night")) {
-        //     mRelativeLayout.setBackgroundColor(Color.parseColor("#7F706C"));
-        // }
     }
 
 
