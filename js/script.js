@@ -42,7 +42,7 @@ const _viewModel = {
             if (status === 'OK') {
                 if (results[0]) {
                     console.log(results[0].formatted_address)
-                    _viewModel.addressValue.innerHTML = results[0].formatted_address.split(",")[0]
+                    _viewModel.addressValue.innerHTML = results[0].formatted_address
                 } else {
                     _viewModel.addressValue.innerHTML = ""
                 }
@@ -131,6 +131,4 @@ const _viewModel = {
                 return backgroundColor = "#B8B8B8";
         }
     }
-
-
 }

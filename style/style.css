@@ -164,6 +164,10 @@ nav {
     margin-right: 10px;
 }
 
+.location {
+    height: 80px;
+}
+
 .location-arrow {
     width: 50%;
     opacity: .6;
